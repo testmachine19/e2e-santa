@@ -77,20 +77,78 @@ describe("user can create a box and run it", () => {
     cy.clearCookies();
   });
 
-  after("delete box", () => {
-    cy.visit("/login");
-    cy.login(users.userAutor.email, users.userAutor.password);
-    cy.get(
-      '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item > .header-item__text > .txt--med'
-    ).click();
-    cy.get(":nth-child(1) > a.base--clickable > .user-card").first().click();
-    cy.get(
-      ".layout-1__header-wrapper-fixed > .layout-1__header-secondary > .header-secondary > .header-secondary__right-item > .toggle-menu-wrapper > .toggle-menu-button > .toggle-menu-button--inner"
-    ).click();
-    cy.contains("Архивация и удаление").click({ force: true });
-    cy.get(":nth-child(2) > .form-page-group__main > .frm-wrapper > .frm").type(
-      "Удалить коробку"
-    );
-    cy.get(".btn-service").click();
+  it("approve as user2", () => {
+    cy.visit(inviteLink);
+    cy.get(generalElements.submitButton).click();
+    cy.contains("войдите").click();
+    cy.login(users.user2.email, users.user2.password);
+    cy.contains("Создать карточку участника").should("exist");
+    cy.get(generalElements.submitButton).click();
+    cy.get(generalElements.arrowRight).click();
+    cy.get(generalElements.arrowRight).click();
+    cy.get(inviteeBoxPage.wishesInput).type(wishes);
+    cy.get(generalElements.arrowRight).click();
+    cy.get(inviteeDashboardPage.noticeForInvitee)
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
+      });
+    cy.clearCookies();
+  });
+
+  it("approve as user3", () => {
+    cy.visit(inviteLink);
+    cy.get(generalElements.submitButton).click();
+    cy.contains("войдите").click();
+    cy.login(users.user3.email, users.user3.password);
+    cy.contains("Создать карточку участника").should("exist");
+    cy.get(generalElements.submitButton).click();
+    cy.get(generalElements.arrowRight).click();
+    cy.get(generalElements.arrowRight).click();
+    cy.get(inviteeBoxPage.wishesInput).type(wishes);
+    cy.get(generalElements.arrowRight).click();
+    cy.get(inviteeDashboardPage.noticeForInvitee)
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
+      });
+    cy.clearCookies();
+  });
+
+  it("approve as user4", () => {
+    cy.visit(inviteLink);
+    cy.get(generalElements.submitButton).click();
+    cy.contains("войдите").click();
+    cy.login(users.user4.email, users.user4.password);
+    cy.contains("Создать карточку участника").should("exist");
+    cy.get(generalElements.submitButton).click();
+    cy.get(generalElements.arrowRight).click();
+    cy.get(generalElements.arrowRight).click();
+    cy.get(inviteeBoxPage.wishesInput).type(wishes);
+    cy.get(generalElements.arrowRight).click();
+    cy.get(inviteeDashboardPage.noticeForInvitee)
+      .invoke("text")
+      .then((text) => {
+        expect(text).to.contain("Это — анонимный чат с вашим Тайным Сантой");
+      });
+    cy.clearCookies();
   });
 });
+
+//   after("delete box", () => {
+//     cy.visit("/login");
+//     cy.login(users.userAutor.email, users.userAutor.password);
+//     cy.get(
+//       '.layout-1__header-wrapper-fixed > .layout-1__header > .header > .header__items > .layout-row-start > [href="/account/boxes"] > .header-item > .header-item__text > .txt--med'
+//     ).click();
+//     cy.get(":nth-child(1) > a.base--clickable > .user-card").first().click();
+//     cy.get(
+//       ".layout-1__header-wrapper-fixed > .layout-1__header-secondary > .header-secondary > .header-secondary__right-item > .toggle-menu-wrapper > .toggle-menu-button > .toggle-menu-button--inner"
+//     ).click();
+//     cy.contains("Архивация и удаление").click({ force: true });
+//     cy.get(":nth-child(2) > .form-page-group__main > .frm-wrapper > .frm").type(
+//       "Удалить коробку"
+//     );
+//     cy.get(".btn-service").click();
+//   });
+// });
