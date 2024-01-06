@@ -33,7 +33,7 @@ describe("user can create a box and run it", () => {
     cy.get(generalElements.arrowRight).click();
     cy.get(boxPage.sixthIcon).click();
     cy.get(generalElements.arrowRight).click();
-    cy.get(boxPage.giftPriceToggle).check({ force: true });
+    cy.get(boxPage.giftPriceToggle).click();
     cy.get(boxPage.maxAnount).type(maxAmount);
     cy.get(boxPage.currency).select(currency);
     cy.get(generalElements.arrowRight).click();
