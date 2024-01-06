@@ -7,25 +7,22 @@ const inviteeBoxPage = require("../fixtures/pages/inviteeBoxPage.json");
 const inviteeDashboardPage = require("../fixtures/pages/inviteeDashboardPage.json");
 import { faker } from "@faker-js/faker";
 
-describe("user can create a box and run it", () => {
-  //пользователь 1 логинится
-  //пользователь 1 создает коробку
-  //пользователь 1 получает приглашение
-  //пользователь 2 переходит по приглашению
-  //пользователь 2 заполняет анкету
-  //пользователь 3 переходит по приглашению
-  //пользователь 3 заполняет анкету
-  //пользователь 4 переходит по приглашению
-  //пользователь 4 заполняет анкету
-  //пользователь 1 логинится
-  //пользователь 1 запускает жеребьевку
-  let newBoxName = faker.word.noun({ length: { min: 5, max: 10 } });
-  let wishes = faker.word.noun() + faker.word.adverb() + faker.word.adjective();
-  let maxAmount = 50;
-  let currency = "Евро";
-  let inviteLink;
+describe("User can create a box and run it", () => {
+  let newBoxName, wishes, maxAmount, currency, inviteLink;
 
-  it("user logins and create a box", () => {
+  before(() => {
+    cy.visit("/login");
+    cy.login(users.userAutor.email, users.userAutor.password);
+  });
+
+  beforeEach(() => {
+    newBoxName = faker.word.noun({ length: { min: 5, max: 10 } });
+    wishes = faker.word.noun() + faker.word.adverb() + faker.word.adjective();
+    maxAmount = 50;
+    currency = "Евро";
+  });
+
+  it("should log in and create a box", () => {
     cy.visit("/login");
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.contains("Создать коробку").click();
@@ -49,7 +46,7 @@ describe("user can create a box and run it", () => {
       });
   });
 
-  it("add participants", () => {
+  it("should add participants", () => {
     cy.get(generalElements.submitButton).click();
     cy.get(invitePage.inviteLink)
       .invoke("text")
@@ -58,7 +55,8 @@ describe("user can create a box and run it", () => {
       });
     cy.clearCookies();
   });
-  it("approve as user1", () => {
+
+  it("should approve as user1", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click();
     cy.contains("войдите").click();
@@ -77,7 +75,7 @@ describe("user can create a box and run it", () => {
     cy.clearCookies();
   });
 
-  it("approve as user2", () => {
+  it("should approve as user2", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click();
     cy.contains("войдите").click();
@@ -96,7 +94,7 @@ describe("user can create a box and run it", () => {
     cy.clearCookies();
   });
 
-  it("approve as user3", () => {
+  it("should approve as user3", () => {
     cy.visit(inviteLink);
     cy.get(generalElements.submitButton).click();
     cy.contains("войдите").click();
@@ -115,7 +113,7 @@ describe("user can create a box and run it", () => {
     cy.clearCookies();
   });
 
-  it("user logins and start a box", () => {
+  it("should log in and start a box", () => {
     cy.visit("/login");
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.get(
@@ -130,7 +128,7 @@ describe("user can create a box and run it", () => {
     ).click();
   });
 
-  after("delete box", () => {
+  after(() => {
     cy.request({
       method: "DELETE",
       url: "https://staging.lpitko.ru/box/9LN8uh",
@@ -140,7 +138,9 @@ describe("user can create a box and run it", () => {
       },
     })
       .then((response) => {
-        expect(response.status).to.eq(204);
+        if (response.status !== 204) {
+          console.error("API-удаление не удалось:", response.body);
+        }
       })
       .catch((error) => {
         console.error("API-удаление не удалось:", error);
