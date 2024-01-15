@@ -1,3 +1,10 @@
 {
-  "wishesInput": ".frm"
+  "wishesInput": ".frm",
+  "firstField": ":nth-child(1) > .frm-wrapper > #input-table-0",
+  "secondField": ":nth-child(2) > .frm-wrapper > #input-table-0",
+  "thirdField": ":nth-child(3) > .frm-wrapper > #input-table-1",
+  "fourthField": ":nth-child(4) > .frm-wrapper > #input-table-1",
+  "fifthField": ":nth-child(5) > .frm-wrapper > #input-table-2",
+  "sixthField": ":nth-child(6) > .frm-wrapper > #input-table-2",
+  "submitInvitation": ".form-page__buttons > .btn-main"
 }
