@@ -5,12 +5,26 @@
   "main": "cypress.config.js",
   "scripts": {
     "cy:run": "npx cypress run",
-    "cy:open": "npx cypress open"
+    "cy:open": "npx cypress open",
+    "cy:run:cloud": "npx cypress run --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
+    "cy:spec1": "npx cypress run --spec 'cypress/e2e/tests/loginAndRunBox.feature' --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
+    "cy:spec2": "npx cypress run --spec 'cypress/e2e/tests1/loginDifUsers.feature' --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
+    "cy:nokey:spec1": "npx cypress run --spec 'cypress/e2e/tests/loginAndRunBox.feature'",
+    "cy:nokey:spec2": "npx cypress run --spec 'cypress/e2e/tests1/loginDifUsers.feature'",
+    "cy:nokey:parallel": "npm run cy:nokey:spec1 & npx cypress run cy:nokey:spec2 --browser electron",
+    "cy:parallel": "npm run cy:spec1 & npx cypress run cy:spec2 --browser electron --group electron --ci build-id 2 --parallel",
+    "cy:run:first:config:folder1": "npx cypress run --config-file 'cypress.config13.js' --browser chrome --spec 'cypress/e2e/tests/loginAndRunBox.feature' --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
+    "cy:run:second:config:folder2": "npx cypress run --config-file 'cypress.config24.js' --browser electron --spec 'cypress/e2e/tests1/loginDifUsers.feature' --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
+    "cy:run:both:configs:parallel": "npm run cy:run:first:config:folder1 --browser electron --group electron --ci build-id 3 --parallel & npm run cy:run:second:config:folder2 --browser electron --group electron --ci build-id 3 --parallel --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.1",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@faker-js/faker": "^8.3.1",
-    "cypress": "^13.6.2"
+    "cypress": "^13.6.2",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "esbuild": "^0.19.11"
   }
 }
