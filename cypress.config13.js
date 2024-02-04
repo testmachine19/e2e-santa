@@ -5,6 +5,7 @@ const createEsbuildPlugin =
   require("@badeball/cypress-cucumber-preprocessor/esbuild").createEsbuildPlugin;
 const addCucumberPreprocessorPlugin =
   require("@badeball/cypress-cucumber-preprocessor").addCucumberPreprocessorPlugin;
+const allureWriter = require("@shelex/cypress-allure-plugin/writer");
 
 module.exports = defineConfig({
   projectId: "2ue5yt",
@@ -21,11 +22,15 @@ module.exports = defineConfig({
 
       on("file:preprocessor", bundler);
       addCucumberPreprocessorPlugin(on, config);
+      allureWriter(on, config);
       return config;
     },
     viewportSizes: {
       width: 1366,
       height: 768,
+    },
+    env: {
+      allureReuseAfterSpec: true,
     },
   },
 });

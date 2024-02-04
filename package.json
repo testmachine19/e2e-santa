@@ -16,7 +16,13 @@
     "cy:parallel": "npm run cy:spec1 & npx cypress run cy:spec2 --browser electron --group electron --ci build-id 2 --parallel",
     "cy:run:first:config:folder1": "npx cypress run --config-file 'cypress.config13.js' --browser chrome --spec 'cypress/e2e/tests/loginAndRunBox.feature' --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
     "cy:run:second:config:folder2": "npx cypress run --config-file 'cypress.config24.js' --browser electron --spec 'cypress/e2e/tests1/loginDifUsers.feature' --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
-    "cy:run:both:configs:parallel": "npm run cy:run:first:config:folder1 --browser electron --group electron --ci build-id 3 --parallel & npm run cy:run:second:config:folder2 --browser electron --group electron --ci build-id 3 --parallel --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345"
+    "cy:run:both:configs:parallel": "npm run cy:run:first:config:folder1 --browser electron --group electron --ci build-id 3 --parallel & npm run cy:run:second:config:folder2 --browser electron --group electron --ci build-id 3 --parallel --record --key 47bdbc3a-326a-4936-a508-f3ff22a42345",
+    "test:config1": "npm run clean:allure && npm run test:cypress -- --config-file 'cypress.config13.js' && npm run allure:generate && npm run allure:open",
+    "test:config2": "npm run clean:allure && npm run test:cypress -- --config-file 'cypress.config24.js' && npm run allure:generate && npm run allure:open",
+    "clean:allure": "rm -rf allure-report",
+    "test:cypress": "cypress run",
+    "allure:generate": "npx allure generate allure-results --clean -o allure-report",
+    "allure:open": "npx allure open allure-report"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +30,8 @@
     "@badeball/cypress-cucumber-preprocessor": "^20.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@faker-js/faker": "^8.3.1",
+    "@shelex/cypress-allure-plugin": "^2.40.1",
+    "allure-commandline": "^2.27.0",
     "cypress": "^13.6.3",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "esbuild": "^0.19.11"
