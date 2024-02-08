@@ -24,6 +24,7 @@ describe("User can create a box and run it", () => {
 
   it("should log in and create a box", () => {
     cy.visit("/login");
+    expect(2).to.eq(8);
     cy.login(users.userAutor.email, users.userAutor.password);
     cy.contains("Создать коробку").click();
     cy.get(boxPage.boxNameField).type(newBoxName);

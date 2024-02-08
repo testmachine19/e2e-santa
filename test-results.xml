@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="6.772" tests="1" failures="1">
+  <testsuite name="Root Suite" timestamp="2024-02-08T15:17:18" tests="0" file="cypress/e2e/santa-box-create.cy.js" time="0.000" failures="0">
+  </testsuite>
+  <testsuite name="User can create a box and run it" timestamp="2024-02-08T15:17:18" tests="1" time="6.762" failures="1">
+    <testcase name="User can create a box and run it should log in and create a box" time="0.000" classname="should log in and create a box">
+      <failure message="expected 2 to equal 8" type="AssertionError"><![CDATA[AssertionError: expected 2 to equal 8
+    at Context.eval (webpack://e2e-santa/./cypress/e2e/santa-box-create.cy.js:27:17)
+
+      + expected - actual
+
+      -2
+      +8
+      ]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>
